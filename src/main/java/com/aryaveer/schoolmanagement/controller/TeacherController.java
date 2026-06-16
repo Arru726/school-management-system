@@ -11,44 +11,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aryaveer.schoolmanagement.entity.Student;
-import com.aryaveer.schoolmanagement.service.StudentService;
+import com.aryaveer.schoolmanagement.entity.Teacher;
+import com.aryaveer.schoolmanagement.service.TeacherService;
 import org.springframework.web.bind.annotation.PutMapping;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/students")
-public class StudentController {
+@RequestMapping("/teachers")
+public class TeacherController {
 
     @Autowired
-    private StudentService studentService;
+    private TeacherService teacherService;
 
     @PostMapping
-    public Student createStudent(@Valid @RequestBody Student student) {
-        return studentService.saveStudent(student);
+    public Teacher createTeacher(@Valid @RequestBody Teacher teacher) {
+        return teacherService.saveTeacher(teacher);
     }
 
     @GetMapping
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    public List<Teacher> getAllTeachers() {
+        return teacherService.getAllTeachers();
     }
 
     @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable Long id) {
-        return studentService.getStudentById(id);
+    public Teacher getTeacherById(@PathVariable Long id) {
+        return teacherService.getTeacherById(id);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteStudent(@PathVariable Long id) {
-        studentService.deleteStudent(id);
-        return "Student deleted successfully";
+    public String deleteTeacher(@PathVariable Long id) {
+        teacherService.deleteTeacher(id);
+        return "Teacher deleted successfully";
     }
 
     @PutMapping("/{id}")
-    public Student updateStudent(
+    public Teacher updateTeacher(
         @PathVariable Long id,
-        @RequestBody Student student) {
+        @Valid @RequestBody Teacher teacher) {
 
-            return studentService.updateStudent(id, student);
+            return teacherService.updateTeacher(id, teacher);
         }
 }
