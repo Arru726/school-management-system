@@ -11,44 +11,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aryaveer.schoolmanagement.entity.Student;
-import com.aryaveer.schoolmanagement.service.StudentService;
+import com.aryaveer.schoolmanagement.entity.Course;
+import com.aryaveer.schoolmanagement.service.CourseService;
 import org.springframework.web.bind.annotation.PutMapping;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/students")
-public class StudentController {
+@RequestMapping("/courses")
+public class CourseController {
 
     @Autowired
-    private StudentService studentService;
+    private CourseService courseService;
 
     @PostMapping
-    public Student createStudent(@Valid @RequestBody Student student) {
-        return studentService.saveStudent(student);
+    public Course createCourse(@Valid @RequestBody Course course) {
+        return courseService.saveCourse(course);
     }
 
     @GetMapping
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    public List<Course> getAllCourses() {
+        return courseService.getAllCourses();
     }
 
     @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable Long id) {
-        return studentService.getStudentById(id);
+    public Course getCourseById(@PathVariable Long id) {
+        return courseService.getCourseById(id);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteStudent(@PathVariable Long id) {
-        studentService.deleteStudent(id);
-        return "Student deleted successfully";
+    public String deleteCourse(@PathVariable Long id) {
+        courseService.deleteCourse(id);
+        return "Course deleted successfully";
     }
 
     @PutMapping("/{id}")
-    public Student updateStudent(
+    public Course updateCourse(
         @PathVariable Long id,
-        @Valid @RequestBody Student student) {
+        @Valid @RequestBody Course course) {
 
-            return studentService.updateStudent(id, student);
+            return courseService.updateCourse(id, course);
         }
 }
