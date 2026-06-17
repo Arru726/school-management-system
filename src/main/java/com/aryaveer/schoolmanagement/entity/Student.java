@@ -4,11 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Email; 
-
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "students")
@@ -25,8 +26,9 @@ public class Student {
     @Email(message = "Invalid email format")
     private String email;
 
-    @NotBlank(message = "Course is required")
-    private String course;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     @NotNull(message = "Invalid year")
     private Integer year;
@@ -57,11 +59,11 @@ public class Student {
         this.email = email;
     }
 
-    public String getCourse() {
+    public Course getCourse() {
         return course;
     }
 
-    public void setCourse(String course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
 

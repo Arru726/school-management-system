@@ -1,14 +1,18 @@
 package com.aryaveer.schoolmanagement.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Email;
-
 
 @Entity
 @Table(name = "teachers")
@@ -37,58 +41,74 @@ public class Teacher {
     @NotBlank(message = "Designation required")
     private String designation;
 
+    @ManyToMany
+    @JoinTable(
+        name = "teacher_courses",
+        joinColumns = @JoinColumn(name = "teacher_id"),
+        inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> courses;
+
     public Teacher() {
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getSubject(){
+    public String getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject){
+    public void setSubject(String subject) {
         this.subject = subject;
     }
 
-    public Integer getJoiningYear(){
+    public Integer getJoiningYear() {
         return joiningYear;
     }
 
-    public void setJoiningYear(Integer joiningYear){
+    public void setJoiningYear(Integer joiningYear) {
         this.joiningYear = joiningYear;
     }
 
-    public String getPhone(){
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone){
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getDesignation(){
+    public String getDesignation() {
         return designation;
     }
 
-    public void setDesignation(String designation){
+    public void setDesignation(String designation) {
         this.designation = designation;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }
